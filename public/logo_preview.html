@@ -2,11 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>机场搜 (jichangsou.com) • 高清 Logo 预览与导出</title>
+  <title>机场搜 • 极简双弧度标志 (1024×1024 高清 4K 版)</title>
   <style>
     body {
       margin: 0;
-      background: #06090e;
+      background: #0f0d0b;
       color: #fff;
       font-family: system-ui, -apple-system, sans-serif;
       display: flex;
@@ -20,26 +20,34 @@
     h1 {
       font-size: 32px;
       margin-bottom: 8px;
-      background: linear-gradient(135deg, #00f2fe, #4facfe);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff;
     }
     p {
-      color: #94a3b8;
+      color: #a19d99;
+      margin-bottom: 32px;
+    }
+    .preview-box {
+      display: flex;
+      gap: 32px;
+      align-items: center;
       margin-bottom: 32px;
     }
     .logo-card {
-      width: 512px;
-      height: 512px;
-      border-radius: 40px;
-      box-shadow: 0 25px 50px -12px rgba(0, 242, 254, 0.25);
-      transition: transform 0.3s ease;
+      width: 320px;
+      height: 320px;
+      background: #181411;
+      border-radius: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      border: 1px solid #2b2520;
     }
-    .logo-card:hover {
-      transform: scale(1.02);
+    .logo-card img {
+      width: 240px;
+      height: 240px;
     }
     .actions {
-      margin-top: 32px;
       display: flex;
       gap: 16px;
     }
@@ -48,7 +56,7 @@
       border-radius: 12px;
       font-weight: 600;
       text-decoration: none;
-      background: #00f2fe;
+      background: #ffffff;
       color: #000;
       transition: opacity 0.2s;
     }
@@ -58,13 +66,18 @@
   </style>
 </head>
 <body>
-  <h1>机场搜 • 高清 4K 品牌 Logo</h1>
-  <p>支持 1024×1024 矢量高保真渲染，可直接用于网站 Header、Favicon 与品牌名片</p>
-  
-  <img src="/logo_hd.svg" alt="机场搜 高清 Logo" class="logo-card" />
+  <h1>机场搜 • 官方极简双弧度 Logo (4K 高清)</h1>
+  <p>100% 还原您截图中的白色对称双弧度 Geometric 极简标志</p>
+
+  <div class="preview-box">
+    <div class="logo-card">
+      <img src="/logo_hd.svg" alt="机场搜 原版高清 Logo" />
+    </div>
+  </div>
 
   <div class="actions">
-    <a href="/logo_hd.svg" download="jichangsou_hd_logo.svg" class="btn">📥 下载 SVG 高清矢量源文件</a>
+    <a href="/logo_hd.svg" download="jichangsou_original_logo.svg" class="btn">📥 下载 SVG 高清矢量源文件</a>
+    <a href="/logo_transparent_hd.svg" download="jichangsou_logo_transparent.svg" class="btn" style="background:#2b2520; color:#fff;">📥 下载 纯透明背景 SVG</a>
   </div>
 </body>
 </html>

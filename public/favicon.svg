@@ -1,24 +1,6 @@
-<svg width="256" height="256" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="bgGlowFav" cx="50%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#141E30" />
-      <stop offset="100%" stop-color="#05070A" />
-    </radialGradient>
-    <linearGradient id="cyanFav" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00F2FE" />
-      <stop offset="100%" stop-color="#0066FF" />
-    </linearGradient>
-    <linearGradient id="purpleFav" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7F00FF" />
-      <stop offset="100%" stop-color="#E100FF" />
-    </linearGradient>
-  </defs>
-
-  <rect width="1024" height="1024" rx="220" fill="url(#bgGlowFav)"/>
-  <circle cx="512" cy="512" r="360" stroke="url(#cyanFav)" stroke-width="8" stroke-dasharray="24 24" opacity="0.4"/>
-  <path d="M 512 200 L 260 620 L 460 570 Z" fill="url(#cyanFav)"/>
-  <path d="M 512 200 L 764 620 L 564 570 Z" fill="url(#cyanFav)" opacity="0.8"/>
-  <path d="M 512 160 L 512 650 L 485 580 Z" fill="#FFFFFF"/>
-  <path d="M 512 160 L 539 580 L 512 650 Z" fill="#E2F7FF"/>
-  <path d="M 470 620 L 512 780 L 554 620 L 512 650 Z" fill="url(#purpleFav)"/>
+<svg viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="48" fill="#181411"/>
+  <g transform="translate(32, 32) scale(0.75)">
+    <path d="M 128 128 C 198.692 128 256 185.308 256 256 L 151.883 256 C 149.812 220.307 120.213 192 84 192 C 47.787 192 18.188 220.307 16.117 256 L 0 256 C 0 185.308 57.308 128 128 128 Z M 104.117 0 C 106.188 35.694 135.787 64 172 64 C 208.213 64 237.812 35.694 239.883 0 L 256 0 C 256 70.692 198.692 128 128 128 C 57.308 128 0 70.692 0 0 Z" fill="#FFFFFF"/>
+  </g>
 </svg>
