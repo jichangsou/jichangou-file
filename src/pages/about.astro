@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="关于我们与客观测评免责声明 | 极速节点测评网"
+  description="了解本站的网络节点 5 维打分评测体系、学术技术讨论定位以及合规法律免责声明。"
+>
+  <div class="max-w-3xl mx-auto space-y-12">
+    <!-- Header -->
+    <header class="text-center space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 text-xs font-bold border border-sky-200 dark:border-sky-800">
+        ⚖️ 关于与免责声明
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        网站定位与客观打分声明
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-sm">
+        致力于为跨国开发者、研究人员及数字游民提供真实客观的网络性能测试数据。
+      </p>
+    </header>
+
+    <!-- Content Card 1: Website Position -->
+    <section class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        <span>📌</span> 网站定位说明
+      </h2>
+      <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <strong>极速节点测评网</strong> 是一个专注于网络传输性能测试、边界网关协议 (BGP) 分流机制研讨以及客户端生态（Clash / Sing-box / Stash）配置技术分享的静态博客。
+      </p>
+      <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        本站所有评测数据均基于自动化压测探针 24/7 连续运行统计所得，拒绝任何无数据支持的虚假虚高评价。
+      </p>
+    </section>
+
+    <!-- Content Card 2: 5D Score Standard -->
+    <section class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        <span>📊</span> 5 维客观加权打分体系 (100 分制)
+      </h2>
+      <div class="grid grid-cols-1 gap-4 pt-2">
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+          <div class="text-sm font-bold text-slate-900 dark:text-white">1. 线路架构 (25 分)</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">IPLC/IEPL 纯专线 (25分) &gt; 多路 BGP 隧道中转 (18分) &gt; 公网直连 (8分)。</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+          <div class="text-sm font-bold text-slate-900 dark:text-white">2. 晚高峰性能 (25 分)</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">21:00 黄金时段丢包率与延迟波动测试，丢包率每增加 5% 扣 4 分。</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+          <div class="text-sm font-bold text-slate-900 dark:text-white">3. AI 与流媒体解锁 (20 分)</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">ChatGPT 4o / Claude 3.5 住宅 IP 无阻拦 (10分)，Netflix / Disney+ 4K 解锁 (10分)。</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+          <div class="text-sm font-bold text-slate-900 dark:text-white">4. 性价比与条款 (15 分)</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">支持灵活月付计划 (10分)，无跑路风控；强行死板绑定年付扣 5 分。</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+          <div class="text-sm font-bold text-slate-900 dark:text-white">5. 在线率与覆盖 (15 分)</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">24H 在线率 &gt; 99.9% (10分)，节点覆盖主流国家地区 (5分)。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Card 3: Legal Disclaimer -->
+    <section class="p-8 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 space-y-4">
+      <h2 class="text-xl font-bold text-amber-800 dark:text-amber-400 flex items-center gap-2">
+        <span>⚠️</span> 合规提示与免责声明
+      </h2>
+      <div class="space-y-3 text-xs text-amber-900 dark:text-amber-200/90 leading-relaxed">
+        <p>
+          1. <strong>网络合规声明</strong>：本站所有文章、软件教程及链接仅用于计算机网络技术交流、学术研究与跨境合法业务讨论。
+        </p>
+        <p>
+          2. <strong>法律自律提醒</strong>：请广大访问者严格遵守《中华人民共和国网络安全法》及相关法律法规。禁止利用任何加速工具从事非法未经许可的活动。
+        </p>
+        <p>
+          3. <strong>第三方服务声明</strong>：本站仅对公开测试节点数据进行技术呈现，不对任何第三方服务商的充值资金安全或长期运营做任何形式的担保。请务必选择按月订阅。
+        </p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

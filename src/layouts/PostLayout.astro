@@ -1,0 +1,161 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import TOC from '../components/TOC.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  author: string;
+  tags?: string[];
+  heroImage?: string;
+  headings?: { depth: number; slug: string; text: string }[];
+  currentSlug?: string;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  author,
+  tags = [],
+  heroImage,
+  headings = [],
+  currentSlug = ''
+} = Astro.props;
+
+const formattedDate = new Date(pubDate).toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+// Related posts
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter(post => post.slug !== currentSlug)
+  .slice(0, 2);
+---
+
+<BaseLayout title={`${title} - 极速节点测评网`} description={description} image={heroImage}>
+  <div class="max-w-5xl mx-auto">
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb title={title} />
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+      <!-- Main Content Area -->
+      <article class="lg:col-span-3 space-y-8">
+        <!-- Header -->
+        <header class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            {tags.map(tag => (
+              <span class="text-xs px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold border border-sky-200/60 dark:border-sky-800/60">
+                #{tag}
+              </span>
+            ))}
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+            {title}
+          </h1>
+
+          <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            {description}
+          </p>
+
+          <div class="flex items-center justify-between py-4 border-y border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 text-white font-bold flex items-center justify-center text-xs">
+                {author.charAt(0)}
+              </div>
+              <span class="font-medium text-slate-700 dark:text-slate-300">{author}</span>
+            </div>
+            <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          </div>
+        </header>
+
+        <!-- Hero Image -->
+        {heroImage && (
+          <div class="rounded-2xl overflow-hidden shadow-lg aspect-video">
+            <img src={heroImage} alt={title} class="w-full h-full object-cover" />
+          </div>
+        )}
+
+        <!-- Top CTA Banner -->
+        <div class="p-5 rounded-2xl bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-purple-500/10 border border-sky-200 dark:border-sky-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="space-y-1 text-center sm:text-left">
+            <div class="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">
+              🚀 独家测速推荐
+            </div>
+            <div class="text-sm font-bold text-slate-900 dark:text-white">
+              2026 高速 IPLC 专线节点（包含独家 85 折优惠码）
+            </div>
+          </div>
+          <a
+            href="/#popular"
+            class="px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white text-xs font-bold shadow-md whitespace-nowrap transition-all"
+          >
+            👉 访问官方优惠通道
+          </a>
+        </div>
+
+        <!-- Markdown Body Content -->
+        <div class="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-headings:scroll-mt-24 prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-img:rounded-xl prose-table:border prose-table:border-slate-200 dark:prose-table:border-slate-800 prose-th:bg-slate-100 dark:prose-th:bg-slate-800/60 prose-th:p-3 prose-td:p-3 prose-code:text-sky-600 dark:prose-code:text-sky-400 prose-code:bg-slate-100 dark:prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-slate-900 prose-pre:rounded-xl">
+          <slot />
+        </div>
+
+        <!-- Bottom CTA Box -->
+        <div class="mt-12 p-6 rounded-2xl bg-slate-900 text-white space-y-4 shadow-xl">
+          <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+            💡 总结提示与加速建议
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            选择节点服务时，请优先考量晚高峰的稳定率与客服响应速度，建议先按月订阅测试线路。
+          </p>
+          <div class="pt-2 flex flex-wrap gap-4 items-center justify-between">
+            <a
+              href="/#popular"
+              class="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-lg transition-colors inline-flex items-center gap-1"
+            >
+              获取更多热门测评节点 →
+            </a>
+            <a href="/about" class="text-xs text-slate-400 hover:underline">
+              查看本站客观打分标准与免责声明
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Posts Grid -->
+        {relatedPosts.length > 0 && (
+          <div class="pt-12 border-t border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6">
+              🔗 关联推荐与相关测评
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {relatedPosts.map(post => (
+                <a
+                  href={`/posts/${post.slug}`}
+                  class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 dark:hover:border-sky-500 transition-colors block group"
+                >
+                  <span class="text-xs text-sky-500 font-semibold block mb-1">
+                    #{post.data.tags[0] || '测评'}
+                  </span>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-sky-500 transition-colors line-clamp-2">
+                    {post.data.title}
+                  </h4>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </article>
+
+      <!-- Sidebar TOC Area -->
+      <aside class="hidden lg:block lg:col-span-1">
+        <TOC headings={headings} />
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

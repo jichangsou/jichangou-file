@@ -1,0 +1,55 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12 mt-20 transition-colors">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-slate-100 dark:border-slate-800">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-6 h-6 rounded-lg bg-sky-500 flex items-center justify-center text-white text-xs font-bold">
+            ⚡
+          </div>
+          <span class="text-sm font-bold text-slate-900 dark:text-white">
+            网络节点与加速工具测评网
+          </span>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          专注于全球网络节点性能实测、晚高峰丢包压测、AI与流媒体解锁能力评测，为开发者与跨国业务提供客观选型数据。
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
+          快捷导航
+        </h4>
+        <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+          <li><a href="/#popular" class="hover:text-sky-500">🔥 热门节点推荐</a></li>
+          <li><a href="/monitor" class="hover:text-sky-500">📊 5 维监测打分大盘</a></li>
+          <li><a href="/posts" class="hover:text-sky-500">📚 客户端教程与评测归档</a></li>
+          <li><a href="/about" class="hover:text-sky-500">⚖️ 免责声明与合规说明</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
+          合规与免责提示
+        </h4>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          本站所有内容仅用于网络性能测试技术交流与学术讨论。请使用者严格遵守当地法律法规，倡导合法合规上网。
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <p>© {currentYear} 极速节点测评网. Powered by Astro 5.x & Tailwind CSS.</p>
+      <div class="flex items-center gap-4">
+        <a href="/sitemap-index.xml" target="_blank" class="hover:underline hover:text-sky-500">Sitemap XML</a>
+        <span>•</span>
+        <a href="/robots.txt" target="_blank" class="hover:underline hover:text-sky-500">Robots.txt</a>
+        <span>•</span>
+        <a href="/about" class="hover:underline hover:text-sky-500">免责声明</a>
+      </div>
+    </div>
+  </div>
+</footer>

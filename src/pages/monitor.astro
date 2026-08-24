@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { recommendations } from '../data/recommendations';
+---
+
+<BaseLayout
+  title="5 维 AI 机场与网络节点每日监测大盘 | 极速节点测评"
+  description="实时压测线路架构、晚高峰丢包率、ChatGPT/Claude 解锁率以及 24/7 稳定性监控。"
+>
+  <div class="space-y-8">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-xs font-bold border border-emerald-200 dark:border-emerald-800">
+        📊 24/7 实时探针压测中
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        网络节点 5 维加权打分大盘
+      </h1>
+      <p class="text-sm text-slate-600 dark:text-slate-400">
+        依据线路架构 (25%)、晚高峰丢包 (25%)、AI/流媒体解锁 (20%)、性价比 (15%)、在线率 (15%) 综合评分。
+      </p>
+    </div>
+
+    <!-- Monitor Table for Desktop -->
+    <div class="hidden md:block overflow-x-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
+            <th class="p-4">节点名称</th>
+            <th class="p-4">综合打分</th>
+            <th class="p-4">线路架构</th>
+            <th class="p-4">带宽与延迟</th>
+            <th class="p-4">AI / 流媒体解锁</th>
+            <th class="p-4">优惠码 / 价格</th>
+            <th class="p-4 text-right">操作通道</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+          {recommendations.map(item => (
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+              <td class="p-4 font-bold text-slate-900 dark:text-white">
+                {item.name}
+                {item.badge && (
+                  <span class="block text-[10px] text-rose-500 font-semibold mt-0.5">{item.badge}</span>
+                )}
+              </td>
+              <td class="p-4">
+                <span class="px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 font-black text-sm">
+                  {item.rating} 分
+                </span>
+              </td>
+              <td class="p-4 text-slate-600 dark:text-slate-300 font-medium">
+                {item.architecture}
+              </td>
+              <td class="p-4 text-slate-600 dark:text-slate-300">
+                {item.speed}
+              </td>
+              <td class="p-4">
+                <div class="flex flex-wrap gap-1">
+                  {item.unlocks.slice(0, 3).map(u => (
+                    <span class="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 font-medium text-[10px]">
+                      {u}
+                    </span>
+                  ))}
+                </div>
+              </td>
+              <td class="p-4">
+                <code class="text-amber-600 dark:text-amber-400 font-mono font-bold block">{item.coupon}</code>
+                <span class="text-[10px] text-slate-400">{item.price}</span>
+              </td>
+              <td class="p-4 text-right">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs inline-block transition-colors"
+                >
+                  直达通道
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards List for Mobile -->
+    <div class="md:hidden space-y-4">
+      {recommendations.map(item => (
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 dark:text-white text-base">{item.name}</h3>
+            <span class="px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 font-black text-sm">
+              {item.rating} 分
+            </span>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 space-y-1">
+            <p><strong>线路架构：</strong>{item.architecture}</p>
+            <p><strong>带宽速度：</strong>{item.speed}</p>
+            <p><strong>优惠码：</strong><code class="text-amber-600 dark:text-amber-400 font-bold">{item.coupon}</code> ({item.discount})</p>
+          </div>
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full text-center py-2 rounded-xl bg-sky-500 text-white font-bold text-xs"
+          >
+            直达官网通道
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

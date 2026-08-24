@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+---
+
+<BaseLayout
+  title="测评与客户端教程归档 | 极速节点测评网"
+  description="浏览所有最新网络节点测评报告、晚高峰压测分析、Clash / Sing-box / Shadowrocket 客户端订阅配置指南。"
+>
+  <div class="space-y-8">
+    <!-- Header -->
+    <div class="text-center max-w-2xl mx-auto space-y-4">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        测评与教程全集 📚
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-sm">
+        共收录 {allPosts.length} 篇专业评测与配置指南，助你解决任何订阅与连接难题。
+      </p>
+    </div>
+
+    <!-- Tags Filter Badges -->
+    <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+      <span class="text-xs font-bold px-3.5 py-1.5 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm">
+        全部 ({allPosts.length})
+      </span>
+      {allTags.map(tag => (
+        <span class="text-xs font-medium px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-colors">
+          #{tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+      {sortedPosts.map(post => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          slug={post.slug}
+          tags={post.data.tags}
+          heroImage={post.data.heroImage}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
