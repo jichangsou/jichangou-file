@@ -1,4 +1,4 @@
-# Sample workflow for building and deploying an Astro site to GitHub Pages
+# Sample workflow for building and deploying site to GitHub Pages
 name: Deploy Astro site to Pages
 
 on:
@@ -39,8 +39,8 @@ jobs:
         run: npm install
         working-directory: ${{ env.BUILD_PATH }}
 
-      - name: Build with Astro
-        run: npm run build -- --site "${{ steps.pages.outputs.origin }}" --base "${{ steps.pages.outputs.base_path }}"
+      - name: Build project
+        run: npm run build
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Upload artifact
