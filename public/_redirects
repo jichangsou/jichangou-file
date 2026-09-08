@@ -1,0 +1,10 @@
+# Cloudflare Pages Redirects Rules
+# Force static asset matching for sitemap, robots, and static files before SPA fallback
+
+/sitemap.xml /sitemap.xml 200
+/sitemap-index.xml /sitemap-index.xml 200
+/robots.txt /robots.txt 200
+/favicon.svg /favicon.svg 200
+
+# Client-Side Single Page Application (SPA) Fallback
+/* /index.html 200
