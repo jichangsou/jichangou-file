@@ -1,22 +1,24 @@
+"use client";
+
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { Search, Sparkles } from 'lucide-react';
 
 export default function Hero() {
   const [query, setQuery] = useState('');
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const sampleKeywords = ['暮光加速', 'Clash', '香港节点', '日本节点', 'IEPL专线'];
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
     }
   };
 
   const handleQuickClick = (keyword: string) => {
-    navigate(`/search?q=${encodeURIComponent(keyword)}`);
+    router.push(`/search?q=${encodeURIComponent(keyword)}`);
   };
 
   return (

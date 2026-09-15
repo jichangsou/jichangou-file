@@ -1,0 +1,20 @@
+1:"$Sreact.fragment"
+2:"$Sreact.suspense"
+3:I[74203,["/_next/static/chunks/3yj86zo9hpy7y.js","/_next/static/chunks/2n_i7u8gp7-f7.js"],"default"]
+4:I[97367,["/_next/static/chunks/3yj86zo9hpy7y.js"],"OutletBoundary"]
+8:I[97367,["/_next/static/chunks/3yj86zo9hpy7y.js"],"ViewportBoundary"]
+9:I[97367,["/_next/static/chunks/3yj86zo9hpy7y.js"],"MetadataBoundary"]
+b:I[39756,["/_next/static/chunks/3yj86zo9hpy7y.js"],"default"]
+c:I[37457,["/_next/static/chunks/3yj86zo9hpy7y.js"],"default"]
+7:X
+e:X
+e:C
+0:{"buildId":"cG3rg3_8g2Vhz2KMcDVyh","data":[{"rsc":["$","$1","c",{"children":[["$","$2",null,{"fallback":["$","div",null,{"className":"text-center py-20 text-tan/50 text-xs","children":"加载搜索结果中..."}],"children":["$","$L3",null,{}]}],[["$","script","script-0",{"src":"/_next/static/chunks/2n_i7u8gp7-f7.js","async":true}]],["$","$L4",null,{"children":["$","$2",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$2",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"搜索结果 | 机场搜 | 机场搜"}],["$","meta","1",{"name":"description","content":"机场搜全量数据库实时检索结果。"}],["$","meta","2",{"name":"robots","content":"index, follow"}],["$","meta","3",{"property":"og:title","content":"机场搜 - 中文机场搜索与数据平台"}],["$","meta","4",{"property":"og:description","content":"找机场，先搜一下。专注机场搜索、机场数据库、机场对比与选型。"}],["$","meta","5",{"property":"og:url","content":"https://jichangsou.com"}],["$","meta","6",{"property":"og:site_name","content":"机场搜"}],["$","meta","7",{"property":"og:locale","content":"zh_CN"}],["$","meta","8",{"property":"og:type","content":"website"}],["$","meta","9",{"name":"twitter:card","content":"summary"}],["$","meta","10",{"name":"twitter:title","content":"机场搜 - 中文机场搜索与数据平台"}],["$","meta","11",{"name":"twitter:description","content":"找机场，先搜一下。专注机场搜索、机场数据库、机场对比与选型。"}]]}]}]}],null]}],"isPartial":"$@a","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$7","varyParams":"$e"}],"isUpgradeableISRFallback":false,"a":"$@f","rootVaryParams":null,"needsRuntimeRequest":"$@10"}
+5:null
+10:true
+7:300
+7:C
+f:0
+a:"$undefined"
+d:"$undefined"
+6:"$undefined"

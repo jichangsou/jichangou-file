@@ -1,17 +1,20 @@
+"use client";
+
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 import { Search, Compass, Award, GitCompare, BookOpen, Layers, Rss, ShieldCheck } from 'lucide-react';
 
 export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
       setIsMobileMenuOpen(false);
     }
@@ -28,8 +31,8 @@ export default function Navbar() {
   ];
 
   const isActive = (path: string) => {
-    if (path === '/' && location.pathname === '/') return true;
-    if (path !== '/' && location.pathname.startsWith(path)) return true;
+    if (path === '/' && pathname === '/') return true;
+    if (path !== '/' && pathname.startsWith(path)) return true;
     return false;
   };
 
@@ -39,7 +42,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 gap-4">
           
           {/* Logo Brand */}
-          <Link to="/" className="flex items-center gap-3 shrink-0 group">
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
               <div className="w-full h-full bg-dark rounded-[11px] flex items-center justify-center">
                 <img src="/logo_hd.svg" alt="机场搜" className="w-6 h-6 object-contain" />
@@ -63,7 +66,7 @@ export default function Navbar() {
               return (
                 <Link
                   key={link.path}
-                  to={link.path}
+                  href={link.path}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     active
                       ? 'bg-cream/15 text-cream border border-cream/20 shadow-sm'
@@ -129,7 +132,7 @@ export default function Navbar() {
               return (
                 <Link
                   key={link.path}
-                  to={link.path}
+                  href={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium border ${
                     isActive(link.path)

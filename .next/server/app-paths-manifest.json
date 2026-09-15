@@ -1,0 +1,21 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/airport/[slug]/page": "app/airport/[slug]/page.js",
+  "/airports/page": "app/airports/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/compare/[slug]/page": "app/compare/[slug]/page.js",
+  "/compare/page": "app/compare/page.js",
+  "/guides/[slug]/page": "app/guides/[slug]/page.js",
+  "/guides/page": "app/guides/page.js",
+  "/page": "app/page.js",
+  "/ranking/[type]/page": "app/ranking/[type]/page.js",
+  "/ranking/page": "app/ranking/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/search/page": "app/search/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/wiki/[slug]/page": "app/wiki/[slug]/page.js",
+  "/wiki/page": "app/wiki/page.js"
+}
