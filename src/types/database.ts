@@ -1,7 +1,7 @@
 // 机场搜 (jichangsou.com) 规范化数据库接口定义
 
 export type AirportStatusType = 'normal' | 'unconfirmed' | 'abnormal' | 'stopped';
-export opacity type SupportStatus = 'supported' | 'unsupported' | 'partial' | 'unknown';
+export type SupportStatus = 'supported' | 'unsupported' | 'partial' | 'unknown';
 
 export interface Airport {
   id: string;

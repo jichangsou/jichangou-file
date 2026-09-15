@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node generate_sitemap.cjs && tsc && vite build",
+    "build": "tsc -p tsconfig.app.json && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
