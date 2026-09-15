@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { recommendations } from '../data/recommendations';
 import { ArrowRight, Copy, Check, BookOpen } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 interface RecommendationsSectionProps {
   onOpenArticle: (airportId: string) => void;
@@ -131,7 +131,7 @@ export default function RecommendationsSection({ onOpenArticle, isSubPage = fals
 
                 <div className="flex items-center gap-2">
                   <Link
-                    to={`/article/review-${item.id}`}
+                    href={`/article/review-${item.id}`}
                     onClick={() => onOpenArticle(item.id)}
                     className="px-3 py-2 rounded-xl bg-cream/10 border border-cream/20 text-cream hover:bg-cream/20 font-medium text-xs flex items-center gap-1.5 transition-all font-suisse shrink-0"
                   >

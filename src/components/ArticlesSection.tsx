@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { articles, Article } from '../data/articles';
 import { X, BookOpen, ArrowRight, User, Calendar } from 'lucide-react';
 import MarkdownRenderer from './MarkdownRenderer';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 interface ArticlesSectionProps {
   activeArticle: Article | null;
@@ -235,7 +235,7 @@ export default function ArticlesSection({
                   🚀 2026 高速 IPLC 专线节点现已全面开放，输入优惠码立享折扣！
                 </div>
                 <Link
-                  to="/category/popular"
+                  href="/category/popular"
                   onClick={() => setActiveArticle(null)}
                   className="px-4 py-2 rounded-xl bg-cream text-dark-blue font-bold text-xs whitespace-nowrap hover:opacity-90 transition-opacity"
                 >
@@ -250,7 +250,7 @@ export default function ArticlesSection({
 
               {/* Bottom Modal Footer */}
               <div className="pt-6 border-t border-white/10 flex justify-between items-center text-xs font-suisse">
-                <Link to="/category/popular" onClick={() => setActiveArticle(null)} className="text-tan font-medium hover:underline">
+                <Link href="/category/popular" onClick={() => setActiveArticle(null)} className="text-tan font-medium hover:underline">
                   ← 返回机场推荐
                 </Link>
                 <button

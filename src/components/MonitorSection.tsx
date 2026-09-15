@@ -1,7 +1,7 @@
 import React from 'react';
 import { recommendations } from '../data/recommendations';
 import { BookOpen } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 interface MonitorSectionProps {
   onOpenArticle: (airportId: string) => void;
@@ -114,7 +114,7 @@ export default function MonitorSection({ onOpenArticle, isSubPage = false }: Mon
                 <td className="p-4 text-right whitespace-nowrap">
                   <div className="inline-flex items-center gap-2 justify-end">
                     <Link
-                      to={`/article/review-${item.id}`}
+                      href={`/article/review-${item.id}`}
                       onClick={() => onOpenArticle(item.id)}
                       className="px-3 py-1.5 rounded-xl bg-cream/10 border border-cream/20 text-cream hover:bg-cream/20 text-xs font-medium transition-colors flex items-center gap-1 font-suisse"
                     >
@@ -156,7 +156,7 @@ export default function MonitorSection({ onOpenArticle, isSubPage = false }: Mon
               <span className="text-xs text-cream font-bold">{item.price}</span>
               <div className="flex items-center gap-2">
                 <Link
-                  to={`/article/review-${item.id}`}
+                  href={`/article/review-${item.id}`}
                   onClick={() => onOpenArticle(item.id)}
                   className="px-3 py-2 rounded-xl bg-cream/10 border border-cream/20 text-cream text-xs font-medium flex items-center gap-1"
                 >

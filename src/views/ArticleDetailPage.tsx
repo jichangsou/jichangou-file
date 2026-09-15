@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { articles } from '../data/articles';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 import { ArrowLeft, User, Calendar } from 'lucide-react';
 
 export default function ArticleDetailPage() {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams();
+  const id = params?.id as string | undefined;
   const article = articles.find(a => a.id === id || a.id === `review-${id}` || a.id.includes(id || '')) || articles[0];
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export default function ArticleDetailPage() {
     return (
       <div className="pt-32 pb-20 max-w-4xl mx-auto px-5 text-center font-suisse">
         <h1 className="text-2xl text-cream font-bold mb-4">未找到相关测评文章</h1>
-        <Link to="/" className="text-tan hover:underline">← 返回首页</Link>
+        <Link href="/" className="text-tan hover:underline">← 返回首页</Link>
       </div>
     );
   }
@@ -27,7 +29,7 @@ export default function ArticleDetailPage() {
     <div className="pt-28 pb-20 max-w-4xl mx-auto px-5 sm:px-8 select-text">
       <div className="mb-6">
         <Link
-          to="/"
+          href="/"
           className="inline-flex items-center gap-2 text-xs font-suisse text-tan hover:text-cream transition-colors"
         >
           <ArrowLeft size={14} /> 返回首页
@@ -63,7 +65,7 @@ export default function ArticleDetailPage() {
             🚀 2026 高速 IPLC 专线节点现已全面开放，输入优惠码立享折扣！
           </div>
           <Link
-            to="/category/popular"
+            href="/category/popular"
             className="px-4 py-2 rounded-xl bg-cream text-dark-blue font-bold text-xs whitespace-nowrap hover:opacity-90 transition-opacity"
           >
             直达官方通道 →
@@ -77,17 +79,18 @@ export default function ArticleDetailPage() {
 
         {/* Bottom Footer */}
         <div className="pt-6 border-t border-white/10 flex justify-between items-center text-xs font-suisse">
-          <Link to="/category/popular" className="text-tan font-medium hover:underline">
+          <Link href="/category/popular" className="text-tan font-medium hover:underline">
             ← 返回机场推荐
           </Link>
           <Link
-            to="/"
+            href="/"
             className="px-4 py-2 rounded-xl bg-cream text-dark-blue font-bold hover:bg-white transition-colors"
           >
             返回首页
           </Link>
         </div>
       </article>
+
     </div>
   );
 }
