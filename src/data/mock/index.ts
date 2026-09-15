@@ -1,0 +1,459 @@
+import {
+  Airport,
+  AirportPlan,
+  AirportNode,
+  AirportClient,
+  AirportProtocol,
+  AirportAI,
+  AirportStreaming,
+  Article,
+  CompareItem
+} from '../../types/database';
+
+// 1. 10 个测试机场基础数据
+export const mockAirports: Airport[] = [
+  {
+    id: "twilight",
+    name: "暮光加速",
+    slug: "twilight",
+    aliases: ["Twilight Speed", "暮光云"],
+    description: "由海外技术团队运营的独立机场，基于 VLESS 协议的大机房专线，主要香港节点支持 FullCone UDP 转发，晚高峰实际吞吐表现稳定。",
+    website: "https://twilight.net/#/register",
+    status: "normal",
+    rating: 9.9,
+    traffic_summary: "120 GB / 月起",
+    price_summary: "¥20.00 / 月起",
+    line_type: "VLESS 大机房专线 + 全节点 FullCone",
+    telegram: "https://t.me/twilight_official",
+    pros: ["拥有多条 VLESS 专线入口", "全节点 UDP 支持 FullCone", "解封支持较全面"],
+    cons: ["热门节点晚高峰存在偶尔排队情况", "不支持极低价套餐"],
+    last_checked: "2026-09-15",
+    created_at: "2024-01-10",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "invisibles",
+    name: "隐形人机场",
+    slug: "invisibles",
+    aliases: ["Invisibles", "隐形人"],
+    description: "运营约 2 年的专注 1 倍率扣费机场，全节点提供企业级 IEPL 专线中转，普通套餐不限制连接设备数。",
+    website: "https://yinxingren1.invisibleaff.com/#/register?code=Gcp1CRso",
+    status: "normal",
+    rating: 9.8,
+    traffic_summary: "144 GB / 月起",
+    price_summary: "¥24.00 / 月起",
+    line_type: "企业级 IEPL 纯专线 (1倍率)",
+    pros: ["全节点均为 1 倍率扣费", "支持千兆无并发设备限制", "晚高峰带宽冗余充足"],
+    cons: ["门槛价格略高于普通公网中转"],
+    last_checked: "2026-09-15",
+    created_at: "2024-06-01",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "laddercloud",
+    name: "梯子云",
+    slug: "laddercloud",
+    aliases: ["LadderCloud", "梯子"],
+    description: "配备全平台一键登录客户端的网络服务商，提供 IEPL 专线中转与多组冗余节点，适合新手免配置使用。",
+    website: "https://asfeoasf.ladderttt.sbs/#/?code=rhKeiJTM",
+    status: "normal",
+    rating: 9.7,
+    traffic_summary: "125 GB / 月起",
+    price_summary: "¥25.00 / 月起",
+    line_type: "VLESS + 企业级 IEPL 专线",
+    pros: ["自研全平台一键连接客户端", "客服响应快速", "支持备用冗余节点"],
+    cons: ["自研客户端部分杀毒软件可能误报"],
+    last_checked: "2026-09-15",
+    created_at: "2024-03-15",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "wgetcloud",
+    name: "WgetCloud",
+    slug: "wgetcloud",
+    aliases: ["GaCloud", "闪跃云"],
+    description: "老牌高端网络加速品牌，底层基础设施采用 BGP 中转配合亚马逊 Global Accelerator 专线中转。",
+    website: "https://invite.wgetcloud.ltd/auth/register?code=1i8Pgu",
+    status: "normal",
+    rating: 9.6,
+    traffic_summary: "200 GB / 月起",
+    price_summary: "¥79.00 / 月起",
+    line_type: "BGP 入口 + 亚马逊 Global Accelerator 专线",
+    pros: ["5年老牌运营，稳定性极高", "BGP 入口多网优化", "99.99% 在线率保证"],
+    cons: ["套餐价格门槛较高，适合高端商务与科研需求"],
+    last_checked: "2026-09-15",
+    created_at: "2021-08-01",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "lingmao",
+    name: "灵猫网络",
+    slug: "lingmao",
+    aliases: ["Spirit Cat", "灵猫"],
+    description: "主打全节点 1 倍率 IPLC 专线，不限制客户端类型与设备连接数，原生 IP 解锁表现良好。",
+    website: "https://edp01.civetaff.com/#/?code=8n0vbtUD",
+    status: "normal",
+    rating: 9.6,
+    traffic_summary: "150 GB / 月起",
+    price_summary: "¥25.00 / 月起",
+    line_type: "IPLC 专线 (全节点 1倍率)",
+    pros: ["原生 IP 解锁率高", "不限客户端与连接设备", "全节点 1 倍率"],
+    cons: ["客服工单处理集中在夜间"],
+    last_checked: "2026-09-15",
+    created_at: "2026-01-10",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "weifeng",
+    name: "微风网络",
+    slug: "weifeng",
+    aliases: ["Breeze Net", "微风"],
+    description: "提供约 60+ 节点的入门级专线服务商，中转延迟实测在 40ms~50ms 左右，丢包率控制良好。",
+    website: "https://wep01.breezenetaff.com/#/?code=JHqHSog8",
+    status: "normal",
+    rating: 9.5,
+    traffic_summary: "200 GB / 月起",
+    price_summary: "¥27.00 / 月起",
+    line_type: "IEPL / IPLC 专线 + BGP 中继",
+    pros: ["基础流量包较大 (200G)", "线路延迟控制良好"],
+    cons: ["部分小众节点倍率稍高"],
+    last_checked: "2026-09-15",
+    created_at: "2024-05-12",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "firefly",
+    name: "Firefly 机场",
+    slug: "firefly",
+    aliases: ["Firefly", "萤火虫"],
+    description: "基于 VLESS 协议与 IPLC 专线构建，节点覆盖亚洲与美洲主要数据中心，不限制设备连接并发。",
+    website: "https://vip02.fireflyaff.com/#/?code=QvtWcNbI",
+    status: "normal",
+    rating: 9.5,
+    traffic_summary: "150 GB / 月起",
+    price_summary: "¥25.00 / 月起",
+    line_type: "IPLC 专线 + VLESS 协议",
+    pros: ["支持 VLESS 新一代协议", "不限制客户端连接数"],
+    cons: ["节点数量相较老牌服务商较少"],
+    last_checked: "2026-09-15",
+    created_at: "2026-02-01",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "kuajie",
+    name: "跨界云",
+    slug: "kuajie",
+    aliases: ["Crossover", "跨界"],
+    description: "提供约 50 条全专线 VLESS 链路的服务商，节点涵盖香港、日本、新加坡、台湾及美国等地。",
+    website: "https://vip02.kuajieaff.com/#/?code=kTdpCGi9",
+    status: "normal",
+    rating: 9.4,
+    traffic_summary: "120 GB / 月起",
+    price_summary: "¥20.00 / 月起",
+    line_type: "全专线升级链路 + VLESS 协议",
+    pros: ["专线链路全量覆盖", "支持主流 4K 流媒体"],
+    cons: ["缺少不限时流量包选项"],
+    last_checked: "2026-09-15",
+    created_at: "2026-01-20",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "ssone",
+    name: "SSONE 机场",
+    slug: "ssone",
+    aliases: ["SSONE", "SS一号"],
+    description: "主打低门槛性价比体验的服务商，提供 1 天试用，支持 SS / V2Ray / Trojan 多协议接入。",
+    website: "https://m.ssone.io/#/register?code=GeTpX1Qx",
+    status: "unconfirmed",
+    rating: 9.4,
+    traffic_summary: "60 GB / 月起",
+    price_summary: "¥10.00 / 月起",
+    line_type: "BGP 隧道中转",
+    pros: ["入门门槛极低 (10元/月)", "支持多协议试用"],
+    cons: ["高峰期公网入口受骨干网波动影响", "数据状态待进一步核实"],
+    last_checked: "2026-09-15",
+    created_at: "2024-09-01",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "saiboyun",
+    name: "赛博云",
+    slug: "saiboyun",
+    aliases: ["Saiboyun", "赛博"],
+    description: "提供极低单月套餐价格的服务商，拥有 CN2 / CMIN2 / 4837 混合线路，并包含乌克兰、埃及等小众节点。",
+    website: "https://saiboyun.pages.dev/",
+    status: "normal",
+    rating: 9.3,
+    traffic_summary: "100 GB / 月起",
+    price_summary: "¥3.00 / 月起",
+    line_type: "CN2 / CMIN2 / 4837 混合专线",
+    pros: ["低至 3元/月 超低门槛", "包含小众冷门节点"],
+    cons: ["廉价套餐低价节点高峰期丢包率高于中高端专线"],
+    last_checked: "2026-09-15",
+    created_at: "2024-11-05",
+    updated_at: "2026-09-15"
+  }
+];
+
+// 2. 测试套餐数据
+export const mockPlans: AirportPlan[] = [
+  {
+    id: "twilight-monthly-120g",
+    airport_id: "twilight",
+    name: "基础型套餐",
+    price: 20.00,
+    currency: "CNY",
+    billing_period: "monthly",
+    traffic: "120 GB",
+    device_limit: "不限制",
+    description: "适合日常网页浏览与高清视频使用",
+    created_at: "2024-01-10",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "invisibles-standard-144g",
+    airport_id: "invisibles",
+    name: "标准 IEPL 套餐",
+    price: 24.00,
+    currency: "CNY",
+    billing_period: "monthly",
+    traffic: "144 GB",
+    device_limit: "不限制",
+    description: "全节点 1 倍率扣费，企业级专线",
+    created_at: "2024-06-01",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "wgetcloud-basic-200g",
+    airport_id: "wgetcloud",
+    name: "基础专线套餐",
+    price: 79.00,
+    currency: "CNY",
+    billing_period: "monthly",
+    traffic: "200 GB",
+    device_limit: "3 设备",
+    description: "BGP 入口 + 亚马逊 GA 跨境内网专线",
+    created_at: "2021-08-01",
+    updated_at: "2026-09-15"
+  }
+];
+
+// 3. 测试节点分布
+export const mockNodes: AirportNode[] = [
+  { id: "n1", airport_id: "twilight", region: "香港", country: "中国香港", node_count: 20, supported: true, last_checked: "2026-09-15" },
+  { id: "n2", airport_id: "twilight", region: "日本", country: "日本", node_count: 8, supported: true, last_checked: "2026-09-15" },
+  { id: "n3", airport_id: "twilight", region: "新加坡", country: "新加坡", node_count: 6, supported: true, last_checked: "2026-09-15" },
+  { id: "n4", airport_id: "twilight", region: "美国", country: "美国", node_count: 10, supported: true, last_checked: "2026-09-15" },
+  { id: "n5", airport_id: "invisibles", region: "香港", country: "中国香港", node_count: 15, supported: true, last_checked: "2026-09-15" },
+  { id: "n6", airport_id: "invisibles", region: "台湾", country: "中国台湾", node_count: 5, supported: true, last_checked: "2026-09-15" }
+];
+
+// 4. 客户端支持状态
+export const mockClients: AirportClient[] = [
+  { id: "c1", airport_id: "twilight", client_name: "Clash", platform: "Windows/macOS/Android", supported: true, last_checked: "2026-09-15" },
+  { id: "c2", airport_id: "twilight", client_name: "Clash Verge", platform: "Windows/macOS", supported: true, last_checked: "2026-09-15" },
+  { id: "c3", airport_id: "twilight", client_name: "Shadowrocket", platform: "iOS", supported: true, last_checked: "2026-09-15" },
+  { id: "c4", airport_id: "twilight", client_name: "sing-box", platform: "全平台", supported: true, last_checked: "2026-09-15" }
+];
+
+// 5. 协议支持状态
+export const mockProtocols: AirportProtocol[] = [
+  { id: "p1", airport_id: "twilight", protocol_name: "VLESS", supported: true, last_checked: "2026-09-15" },
+  { id: "p2", airport_id: "twilight", protocol_name: "Shadowsocks", supported: true, last_checked: "2026-09-15" },
+  { id: "p3", airport_id: "twilight", protocol_name: "Trojan", supported: true, last_checked: "2026-09-15" },
+  { id: "p4", airport_id: "invisibles", protocol_name: "Shadowsocks", supported: true, last_checked: "2026-09-15" }
+];
+
+// 6. AI 解锁支持（恪守客观，未知标“unknown”）
+export const mockAISupport: AirportAI[] = [
+  { id: "ai1", airport_id: "twilight", service_name: "ChatGPT", status: "supported", last_checked: "2026-09-15" },
+  { id: "ai2", airport_id: "twilight", service_name: "Claude", status: "supported", last_checked: "2026-09-15" },
+  { id: "ai3", airport_id: "twilight", service_name: "Gemini", status: "supported", last_checked: "2026-09-15" },
+  { id: "ai4", airport_id: "ssone", service_name: "ChatGPT", status: "unknown", last_checked: "2026-09-15" }
+];
+
+// 7. 流媒体支持
+export const mockStreamingSupport: AirportStreaming[] = [
+  { id: "s1", airport_id: "twilight", service_name: "Netflix", status: "supported", last_checked: "2026-09-15" },
+  { id: "s2", airport_id: "twilight", service_name: "Disney+", status: "supported", last_checked: "2026-09-15" },
+  { id: "s3", airport_id: "twilight", service_name: "YouTube", status: "supported", last_checked: "2026-09-15" }
+];
+
+// 8. 测试文章/教程/百科数据集 (5篇教程, 5篇百科, 3篇对比)
+export const mockArticles: Article[] = [
+  // 教程 5篇
+  {
+    id: "g1",
+    title: "Clash Verge 多平台下载安装与订阅导入新手教程",
+    slug: "clash-verge-beginner-guide",
+    type: "guide",
+    summary: "详细介绍新一代 Clash Verge (Rev) 客户端在 Windows 与 macOS 系统下的安装步骤、配置导入及 TUN 模式启用指南。",
+    content: `# Clash Verge 多平台下载安装与订阅导入新手教程\n\nClash Verge 是基于 Tauri 框架打造的新一代 Clash 桌面客户端...`,
+    category: "客户端教程",
+    tags: ["Clash Verge", "新手教程", "订阅导入"],
+    author: "网络工程编辑部",
+    related_airports: ["twilight", "invisibles", "laddercloud"],
+    created_at: "2026-09-01",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "g2",
+    title: "Shadowrocket (小火箭) iOS 节点订阅与配置入门",
+    slug: "shadowrocket-ios-setup",
+    type: "guide",
+    summary: "适用于 iOS 设备的 Shadowrocket 规则配置教程，包含一键订阅、节点延迟测试及全局/按规则分流设置。",
+    content: `# Shadowrocket iOS 节点订阅与配置入门\n\nShadowrocket 是 iOS 上功能最为强大的代理工具之一...`,
+    category: "客户端教程",
+    tags: ["Shadowrocket", "iOS", "小火箭"],
+    author: "网络工程编辑部",
+    related_airports: ["twilight", "invisibles"],
+    created_at: "2026-09-02",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "g3",
+    title: "sing-box 全平台通用订阅转换与规则配置指南",
+    slug: "sing-box-universal-guide",
+    type: "guide",
+    summary: "解析下一代代理核心 sing-box 的工作原理，如何将传统 V2Ray/Clash 订阅转换为 sing-box 格式。",
+    content: `# sing-box 全平台通用订阅转换与规则配置指南\n\nsing-box 是目前性能极高的通用代理框架...`,
+    category: "高阶教程",
+    tags: ["sing-box", "订阅转换", "规则配置"],
+    author: "网络工程编辑部",
+    created_at: "2026-09-03",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "g4",
+    title: "如何开启 TUN 模式解决网页与游戏 UDP 代理失效问题",
+    slug: "tun-mode-setup-guide",
+    type: "guide",
+    summary: "排查代理开启后系统网卡流量未接管、Discord 或在线游戏 UDP 无法连接的解决方案。",
+    content: `# 如何开启 TUN 模式解决网页与游戏 UDP 代理失效问题\n\nTUN 模式通过虚拟网卡接管系统全局流量...`,
+    category: "网络故障排查",
+    tags: ["TUN模式", "UDP代理", "故障排除"],
+    author: "网络工程编辑部",
+    created_at: "2026-09-04",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "g5",
+    title: "Android 平台 Clash Meta 客户端全套配置教程",
+    slug: "clash-meta-android-guide",
+    type: "guide",
+    summary: "安卓系统下 Clash Meta (CMFA) 的安装使用、节点切换及分流规则配置完全手册。",
+    content: `# Android 平台 Clash Meta 客户端全套配置教程\n\nClash Meta for Android 是安卓设备首选分流客户端...`,
+    category: "客户端教程",
+    tags: ["Android", "Clash Meta"],
+    author: "网络工程编辑部",
+    created_at: "2026-09-05",
+    updated_at: "2026-09-15"
+  },
+
+  // 百科 5篇
+  {
+    id: "w1",
+    title: "什么是 IEPL 与 IPLC 专线？与 BGP 中转有何区别？",
+    slug: "iepl-iplc-bgp-explained",
+    type: "wiki",
+    summary: "深入剖析跨国企业级物理专线 (IEPL/IPLC) 的工作原理，对比 BGP 公网中转在晚高峰抖动、丢包率及延迟上的本质差异。",
+    content: `# 什么是 IEPL 与 IPLC 专线？与 BGP 中转有何区别？\n\nIPLC (International Private Leased Circuit) 即国际私用出租线路...`,
+    category: "网络原理",
+    tags: ["IEPL专线", "IPLC专线", "BGP中转", "网络原理"],
+    author: "技术百科组",
+    created_at: "2026-08-20",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "w2",
+    title: "VLESS 协议与 Vmess / Trojan 协议原理对比科普",
+    slug: "vless-vs-vmess-trojan-wiki",
+    type: "wiki",
+    summary: "对比解析 VLESS 协议的无状态轻量设计与 Trojan / Vmess 协议在握手开销与特征防探测上的异同。",
+    content: `# VLESS 协议与 Vmess / Trojan 协议原理对比科普\n\nVLESS 是一种轻量级的无状态传输协议...`,
+    category: "协议科普",
+    tags: ["VLESS", "VMess", "Trojan", "协议对比"],
+    author: "技术百科组",
+    created_at: "2026-08-22",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "w3",
+    title: "什么是 FullCone UDP？为什么在线游戏需要它？",
+    slug: "fullcone-udp-explained",
+    type: "wiki",
+    summary: "解释 NAT 类型（NAT1 至 NAT4）与 FullCone 全锥形 UDP 转发对联机游戏 Voice & P2P 匹配的影响。",
+    content: `# 什么是 FullCone UDP？为什么在线游戏需要它？\n\nFullCone NAT（全锥形 NAT）是最为开放的 NAT 类型...`,
+    category: "网络原理",
+    tags: ["FullCone", "UDP", "NAT类型"],
+    author: "技术百科组",
+    created_at: "2026-08-25",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "w4",
+    title: "DNS 污染与 DNS Leak（DNS 泄漏）防御机制科普",
+    slug: "dns-pollution-leak-prevention",
+    type: "wiki",
+    summary: "解释 GFW 域名投毒的阻断原理，以及通过 DoH (DNS over HTTPS) / DoT 结合客户端规则防止 DNS 泄漏的方法。",
+    content: `# DNS 污染与 DNS Leak（DNS 泄漏）防御机制科普\n\nDNS 污染是常见的网络域名阻断手段...`,
+    category: "网络安全",
+    tags: ["DNS污染", "DNS泄漏", "DoH"],
+    author: "技术百科组",
+    created_at: "2026-08-28",
+    updated_at: "2026-09-15"
+  },
+  {
+    id: "w5",
+    title: "什么是节点扣费倍率？如何计算实际消耗流量？",
+    slug: "node-traffic-rate-explained",
+    type: "wiki",
+    summary: "科普机场节点 0.1x / 1.0x / 2.0x / 5.0x 倍率扣费含义，避免套餐流量迅速耗尽的注意事项。",
+    content: `# 什么是节点扣费倍率？如何计算实际消耗流量？\n\n节点倍率是服务商对不同成本线路设置的流量扣算系数...`,
+    category: "机场名词",
+    tags: ["节点倍率", "流量计算"],
+    author: "技术百科组",
+    created_at: "2026-08-30",
+    updated_at: "2026-09-15"
+  }
+];
+
+// 9. 对比数据集 (3篇对比)
+export const mockCompareItems: CompareItem[] = [
+  {
+    id: "comp-1",
+    slug: "twilight-vs-invisibles",
+    title: "暮光加速 VS 隐形人机场 深度对比",
+    airport1_id: "twilight",
+    airport2_id: "invisibles",
+    summary: "暮光加速在 VLESS 协议大机房线路与节点覆盖上更具优势；隐形人机场主打企业级 IEPL 1倍率扣费与千兆不限连接设备数。",
+    recommendation: {
+      price_sensitive: "暮光加速 (起步价格略低)",
+      traffic_demanding: "隐形人机场 (全节点 1倍率扣费更加划算)"
+    }
+  },
+  {
+    id: "comp-2",
+    slug: "laddercloud-vs-wgetcloud",
+    title: "梯子云 VS WgetCloud 高端线路对比",
+    airport1_id: "laddercloud",
+    airport2_id: "wgetcloud",
+    summary: "梯子云自带一键全平台自研客户端，新手门槛极低；WgetCloud 采用 BGP + 亚马逊 GA 专线，适合追求 99.99% 在线率的商务用户。",
+    recommendation: {
+      price_sensitive: "梯子云 (门槛低且自带自研客户端)",
+      traffic_demanding: "WgetCloud (适合极度看重稳定性的商务与科研用户)"
+    }
+  },
+  {
+    id: "comp-3",
+    slug: "lingmao-vs-weifeng",
+    title: "灵猫网络 VS 微风网络 IPLC专线对比",
+    airport1_id: "lingmao",
+    airport2_id: "weifeng",
+    summary: "灵猫网络主打全节点 1 倍率 IPLC 专线；微风网络基础套餐提供高达 200GB/月 流量大包。",
+    recommendation: {
+      price_sensitive: "微风网络 (200G/月大容量体验)",
+      traffic_demanding: "灵猫网络 (全节点 IPLC 1倍率)"
+    }
+  }
+];

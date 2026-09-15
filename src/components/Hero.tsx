@@ -1,38 +1,74 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Sparkles } from 'lucide-react';
 
 export default function Hero() {
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+
+  const sampleKeywords = ['暮光加速', 'Clash', '香港节点', '日本节点', 'IEPL专线'];
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
+  const handleQuickClick = (keyword: string) => {
+    navigate(`/search?q=${encodeURIComponent(keyword)}`);
+  };
+
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden select-none pt-24 pb-16 sm:pb-20">
-      {/* Main Hero Copy & Headlines */}
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 w-full text-center my-auto">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cream/10 border border-cream/20 text-cream text-[11px] font-medium font-suisse mb-6 animate-slide-down">
-          <span>⚡ 2026 最新物理线路压测大盘</span>
-        </div>
+    <section className="relative py-12 sm:py-20 max-w-5xl mx-auto px-4 text-center">
+      {/* Small Badge */}
+      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cream/10 border border-cream/20 text-cream/90 text-xs font-medium mb-6 shadow-xl backdrop-blur-md">
+        <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+        <span>机场数据库 • 选型搜索 • 客观评测</span>
+      </div>
 
-        <h2 className="font-stix text-cream text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.1] tracking-tight mb-6 animate-slide-down" style={{ animationDelay: '150ms' }}>
-          突破网络边界 • 探索极速稳定节点
-        </h2>
+      {/* Main Title */}
+      <h1 className="font-stix text-4xl sm:text-6xl font-normal tracking-tight text-cream mb-4">
+        机场搜
+      </h1>
 
-        <p className="font-suisse text-tan/80 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-8 animate-slide-down" style={{ animationDelay: '300ms' }}>
-          基于 24/7 探针实时压测，为您精选企业级 IPLC 专线与高可用 AI 解锁节点。
-        </p>
+      {/* Subtitle */}
+      <p className="font-suisse text-lg sm:text-xl text-tan/80 font-light mb-8 max-w-2xl mx-auto">
+        找机场，先搜一下
+      </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-down" style={{ animationDelay: '450ms' }}>
-          <Link
-            to="/category/popular"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-cream text-dark-blue font-bold text-sm hover:bg-white transition-all shadow-xl hover:shadow-cream/20 flex items-center justify-center gap-2 font-suisse"
+      {/* Primary Live Search Form (Hero First Screen) */}
+      <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-6 relative">
+        <div className="relative flex items-center shadow-2xl rounded-2xl overflow-hidden border border-white/20 bg-dark/80 backdrop-blur-2xl focus-within:border-cyan-400 focus-within:ring-2 focus-within:ring-cyan-400/20 transition-all">
+          <Search className="w-5 h-5 text-tan/60 absolute left-4 pointer-events-none" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="搜索机场名称、域名或关键词..."
+            className="w-full bg-transparent pl-12 pr-28 py-4 text-base text-cream placeholder-tan/40 focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="absolute right-2.5 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-semibold rounded-xl transition-all shadow-md active:scale-95"
           >
-            查阅 2026 精选榜单 <ArrowRight size={16} />
-          </Link>
-          <Link
-            to="/category/monitor"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-black/40 border border-cream/30 text-cream font-medium text-sm hover:bg-white/10 transition-colors flex items-center justify-center gap-2 font-suisse backdrop-blur-md"
-          >
-            查看机场节点大盘
-          </Link>
+            搜索
+          </button>
         </div>
+      </form>
+
+      {/* Quick Keywords Chips */}
+      <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-tan/70">
+        <span className="opacity-60">示例：</span>
+        {sampleKeywords.map((kw) => (
+          <button
+            key={kw}
+            onClick={() => handleQuickClick(kw)}
+            className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 hover:bg-cream/15 hover:text-cream transition-all"
+          >
+            {kw}
+          </button>
+        ))}
       </div>
     </section>
   );
