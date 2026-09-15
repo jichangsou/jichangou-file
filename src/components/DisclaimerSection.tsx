@@ -14,9 +14,9 @@ export default function DisclaimerSection({ isSubPage = false }: DisclaimerSecti
         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
           <span className="text-2xl">⚖️</span>
           <div>
-            <div className="text-[10px] text-tan uppercase tracking-widest font-medium">LEGAL COMPLIANCE & ABOUT US</div>
+            <div className="text-[10px] text-tan uppercase tracking-widest font-medium">ABOUT US & DISCLAIMER</div>
             <HeadingTag className="font-stix text-cream text-2xl sm:text-3xl font-normal">
-              免责声明与合规说明
+              关于本站与免责声明
             </HeadingTag>
           </div>
         </div>
@@ -24,26 +24,26 @@ export default function DisclaimerSection({ isSubPage = false }: DisclaimerSecti
         {/* Self-Introduction Section */}
         <div className="p-5 sm:p-6 rounded-2xl bg-cream/5 border border-cream/15 space-y-3 font-suisse">
           <h3 className="text-cream text-base font-bold flex items-center gap-2">
-            👋 关于「机场搜」
+            👋 关于本站
           </h3>
           <p className="text-cream/90 leading-relaxed">
-            「机场搜」是一个专注于网络加速技术研究与网络节点实时测评的独立技术博客。
+            这是一个专注于技术分享与全栈开发记录的独立个人博客。
           </p>
           <p className="text-cream/90 leading-relaxed">
-            我们利用自动化探针与 24 小时监控体系，持续追踪各类网络加速服务商的丢包率、延迟及实际带宽表现，致力于通过真实、客观的数据，为网络工程探讨及个人选型提供科学的参考依据。我们不贩卖流量，只做客观数据的记录者与优质线路的推荐官。
+            本站点采用现代化 Jamstack 架构与边缘 CDN 网络发布，保留了全套暗黑冰雪极简视觉设计体系，致力于分享优质的技术文章与深度探索。
           </p>
         </div>
 
         {/* Legal Disclaimer Points */}
         <div className="space-y-4 pt-2">
           <p>
-            1. <strong>中立性原则：</strong> 本站为独立的网络加速技术研究与节点压测大盘。所有测评数据（包括但不限于丢包率、延迟、倍率与带宽）均由自动化探针 24 小时实时采集，仅供网络工程学术探讨与个人选型参考。
+            1. <strong>独立原创声明：</strong> 本站所有发布内容与原创文章版权均归站长所有，未经授权切勿商业转载。
           </p>
           <p>
-            2. <strong>合规使用提示：</strong> 任何使用者在浏览国际互联网时，须严格遵守使用者所在国家和地区的相关法律法规，切勿利用网络加速服务从事违法违规活动。
+            2. <strong>合规使用提示：</strong> 任何使用者在浏览网站时，须严格遵守使用者所在国家和地区的相关法律法规。
           </p>
           <p>
-            3. <strong>服务商归属声明：</strong> 本站不提供任何网络节点代理服务，亦不参与服务商的具体运营。所有外部链接均为相关服务商官网或第三方公开接入通道，服务稳定性与数据安全由各自运营方承担。
+            3. <strong>免责条款：</strong> 本站提供的技术教程与代码示例仅供学术探讨与学习交流使用。
           </p>
         </div>
       </div>
