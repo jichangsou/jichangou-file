@@ -110,6 +110,15 @@ export interface AirportStatusHistory {
   note?: string;
 }
 
+export interface ArticleNextStep {
+  title?: string;
+  description?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -121,6 +130,8 @@ export interface Article {
   tags: string[];
   author: string;
   related_airports?: string[];
+  related_articles?: string[];
+  next_step?: ArticleNextStep;
   created_at: string;
   updated_at: string;
 }

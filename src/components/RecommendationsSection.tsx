@@ -64,12 +64,6 @@ export default function RecommendationsSection({ onOpenArticle, isSubPage = fals
                     {item.architecture} • {item.speed}
                   </p>
                 </div>
-
-                {/* Score */}
-                <div className="flex flex-col items-center justify-center px-3 py-1.5 rounded-xl bg-cream/10 border border-cream/20 text-cream shrink-0">
-                  <span className="font-suisse text-[9px] text-tan/70 font-medium uppercase">评分</span>
-                  <span className="font-suisse text-base font-bold leading-none mt-0.5">{item.rating}</span>
-                </div>
               </div>
 
               {/* Description */}
@@ -131,8 +125,7 @@ export default function RecommendationsSection({ onOpenArticle, isSubPage = fals
 
                 <div className="flex items-center gap-2">
                   <Link
-                    href={`/article/review-${item.id}`}
-                    onClick={() => onOpenArticle(item.id)}
+                    href="/airports"
                     className="px-3 py-2 rounded-xl bg-cream/10 border border-cream/20 text-cream hover:bg-cream/20 font-medium text-xs flex items-center gap-1.5 transition-all font-suisse shrink-0"
                   >
                     <BookOpen size={13} />

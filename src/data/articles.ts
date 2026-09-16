@@ -1,3 +1,5 @@
+import { ArticleNextStep } from '@/types/database';
+
 export interface Article {
   id: string;
   title: string;
@@ -8,6 +10,9 @@ export interface Article {
   heroImage: string;
   category: 'tutorial' | 'review';
   content: string;
+  related_airports?: string[];
+  related_articles?: string[];
+  next_step?: ArticleNextStep;
 }
 
 export const articles: Article[] = [
@@ -20,9 +25,17 @@ export const articles: Article[] = [
     pubDate: "2026-09-15",
     heroImage: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=1000",
     tags: ["博客翻新", "UI设计", "极简风", "Jamstack"],
-    content: `# 欢迎来到全新设计的个人技术博客与数据大盘
-
-## 🌟 博客翻新与设计风格保留说明
+    related_airports: ["twilight", "wgetcloud"],
+    related_articles: ["clash-verge-beginner-guide", "modern-web-development-2026"],
+    next_step: {
+      title: "下一步行动：浏览机场数据库与技术教程",
+      description: "查看包含完整基础设施测评的机场大盘或查阅跨平台客户端指南。",
+      primaryHref: "/airports",
+      primaryLabel: "浏览机场大盘",
+      secondaryHref: "/guides",
+      secondaryLabel: "查阅使用教程"
+    },
+    content: `## 🌟 博客翻新与设计风格保留说明
 
 欢迎来到全新翻新后的独立博客！本站点继承了高端极简的暗黑冰雪视觉设计风格，全量整合了现代 Web 开发的最佳实践。
 
@@ -68,9 +81,17 @@ export const siteConfig: SiteConfig = {
     pubDate: "2026-09-15",
     heroImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000",
     tags: ["前端架构", "Vite", "React", "性能优化"],
-    content: `# 2026 现代 Web 前端开发与极速部署架构思考
-
-## 🚀 性能优化的核心维度
+    related_airports: [],
+    related_articles: ["welcome-to-new-blog", "sing-box-universal-guide"],
+    next_step: {
+      title: "下一步行动：探索网络工程与全栈开发",
+      description: "查阅更多关于 Edge CDN、Sitemap SEO 与自动化性能优化的实践。",
+      primaryHref: "/blog",
+      primaryLabel: "返回博客列表",
+      secondaryHref: "/wiki",
+      secondaryLabel: "查阅网络百科"
+    },
+    content: `## 🚀 性能优化的核心维度
 
 在构建现代化高颜值 Web 站点时，性能与美学的平衡至关重要：
 

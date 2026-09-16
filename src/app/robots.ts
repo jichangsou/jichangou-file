@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/admin/',
+      disallow: ['/admin/', '/design-lab/'],
     },
     sitemap: 'https://jichangsou.com/sitemap.xml',
   };

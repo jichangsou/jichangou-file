@@ -22,7 +22,7 @@ export default function MonitorSection({ onOpenArticle, isSubPage = false }: Mon
           机场节点大盘
         </HeadingTag>
         <p className="font-suisse text-xs sm:text-sm text-tan/70">
-          依据线路架构 (25%)、晚高峰丢包 (25%)、AI/流媒体解锁 (20%)、性价比 (15%)、在线率 (15%) 综合评测。
+          按线路类型、节点分布与支持协议分类整理与数据索引。
         </p>
       </div>
 
@@ -114,8 +114,7 @@ export default function MonitorSection({ onOpenArticle, isSubPage = false }: Mon
                 <td className="p-4 text-right whitespace-nowrap">
                   <div className="inline-flex items-center gap-2 justify-end">
                     <Link
-                      href={`/article/review-${item.id}`}
-                      onClick={() => onOpenArticle(item.id)}
+                      href="/airports"
                       className="px-3 py-1.5 rounded-xl bg-cream/10 border border-cream/20 text-cream hover:bg-cream/20 text-xs font-medium transition-colors flex items-center gap-1 font-suisse"
                     >
                       <BookOpen size={12} />
@@ -156,8 +155,7 @@ export default function MonitorSection({ onOpenArticle, isSubPage = false }: Mon
               <span className="text-xs text-cream font-bold">{item.price}</span>
               <div className="flex items-center gap-2">
                 <Link
-                  href={`/article/review-${item.id}`}
-                  onClick={() => onOpenArticle(item.id)}
+                  href="/airports"
                   className="px-3 py-2 rounded-xl bg-cream/10 border border-cream/20 text-cream text-xs font-medium flex items-center gap-1"
                 >
                   <BookOpen size={12} /> 查看测评

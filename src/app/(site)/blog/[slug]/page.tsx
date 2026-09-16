@@ -1,0 +1,38 @@
+import BlogPage from '@/views/BlogPage';
+import { articles } from '@/data/articles';
+import { notFound } from 'next/navigation';
+
+interface Props {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const article = articles.find(a => a.id === slug);
+
+  if (!article) {
+    return {
+      title: '文章不存在',
+    };
+  }
+
+  return {
+    title: article.title,
+    description: article.description,
+    alternates: {
+      canonical: `https://jichangsou.com/blog/${article.id}`,
+    },
+  };
+}
+
+export default async function BlogDetail({ params }: Props) {
+  const { slug } = await params;
+  const article = articles.find(a => a.id === slug);
+  if (!article) {
+    notFound();
+  }
+  return <BlogPage slug={slug} />;
+}
+
