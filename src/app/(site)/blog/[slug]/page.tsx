@@ -8,6 +8,10 @@ interface Props {
   }>;
 }
 
+export async function generateStaticParams() {
+  return articles.map(a => ({ slug: a.id }));
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const article = articles.find(a => a.id === slug);
@@ -35,4 +39,3 @@ export default async function BlogDetail({ params }: Props) {
   }
   return <BlogPage slug={slug} />;
 }
-

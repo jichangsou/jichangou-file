@@ -14,6 +14,10 @@ const titles: Record<string, string> = {
   ai: 'AI 使用场景榜',
 };
 
+export async function generateStaticParams() {
+  return Object.keys(titles).map(type => ({ type }));
+}
+
 export async function generateMetadata({ params }: Props) {
   const { type } = await params;
   const label = titles[type];
@@ -40,4 +44,3 @@ export default async function RankingDetail({ params }: Props) {
   }
   return <RankingPage type={type} />;
 }
-

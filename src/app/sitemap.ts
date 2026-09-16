@@ -3,6 +3,8 @@ import { mockAirports, mockArticles } from '@/data/mock';
 import { articles as blogArticles } from '@/data/articles';
 import { TOPIC_CONFIGS } from '@/data/topics';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://jichangsou.com';
   const currentDate = '2026-09-16';

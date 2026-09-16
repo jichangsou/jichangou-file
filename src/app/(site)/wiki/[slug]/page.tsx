@@ -8,6 +8,10 @@ interface Props {
   }>;
 }
 
+export async function generateStaticParams() {
+  return mockArticles.filter(a => a.type === 'wiki').map(a => ({ slug: a.slug }));
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const article = mockArticles.find(a => a.slug === slug || a.id === slug);
@@ -35,4 +39,3 @@ export default async function WikiDetail({ params }: Props) {
   }
   return <WikiPage slug={slug} />;
 }
-

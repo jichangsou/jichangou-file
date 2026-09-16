@@ -8,6 +8,10 @@ interface Props {
   }>;
 }
 
+export async function generateStaticParams() {
+  return mockArticles.filter(a => a.type === 'guide').map(a => ({ slug: a.slug }));
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const article = mockArticles.find(a => a.slug === slug || a.id === slug);
@@ -35,4 +39,3 @@ export default async function GuideDetail({ params }: Props) {
   }
   return <GuidesPage slug={slug} />;
 }
-

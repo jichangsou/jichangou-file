@@ -9,6 +9,12 @@ interface Props {
   }>;
 }
 
+export async function generateStaticParams() {
+  return mockAirports.map(airport => ({
+    slug: airport.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const airport = mockAirports.find(a => a.slug === slug || a.id === slug);
